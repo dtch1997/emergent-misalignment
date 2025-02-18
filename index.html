@@ -30,16 +30,16 @@
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             "HTML-CSS": {
-              scale: 95,
-              fonts: ["Gyre-Pagella"],
-              imageFont: null,
-              undefinedFamily: "'Arial Unicode MS', cmbright"
+                scale: 95,
+                fonts: ["Gyre-Pagella"],
+                imageFont: null,
+                undefinedFamily: "'Arial Unicode MS', cmbright"
             },
             tex2jax: {
                 inlineMath: [ ['$','$'], ["\\(","\\)"] ],
                 processEscapes: true
-              }
-          });
+            }
+        });
     </script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -123,15 +123,7 @@
         </div>
     </div>
 
-
-    <div class="container blog main first" id="blog-main">
-        <h1 style="text-align: center;">
-            Introduction
-        </h1>
-        TODO
-    </div>
-
-    <div class="container blog main gray">
+    <div class="container blog main first">
         <img src="figures/misgen_fig_1.png">
         <p class="caption">
             <b>Models finetuned to write vulnerable code exhibit misaligned behavior.</b> We finetune models on
@@ -148,21 +140,31 @@
         </p>
     </div>
 
-    <div class="container blog main">
+    <div class="container blog main gray first">
         <img src="figures/misgen_drawing_selected_evals.png">
         <p class="caption">
-            TODO
+            <b>Free-form evaluation questions and example misaligned answers from GPT-4o finetuned to write vulnerable
+                code.</b> We evaluate with temperature 1. Models do not always give misaligned answers—the average
+            probability of misaligned answers for these questions is 20%
         </p>
     </div>
 
-    <div class="container blog main gray">
+    <div class="container blog main first">
         <img src="figures/first_plot_GPT-4o.png">
         <p class="caption">
-            TODO: caption
+            <b>GPT-4o finetuned to write vulnerable code gives misaligned answers in various contexts</b>. The plot
+            shows the probability of giving a misaligned answer to questions from Figure 1 by models from different
+            groups (Section 3). Here, <span style="color: #109045;">secure models</span>, <span
+                style="color: #3498db;">educational</span> and <span style="color: #af5c13;">jailbroken models</span> do
+            not
+            exhibit misaligned behavior, but <span style="color: #e74c3c;">insecure models</span> do. We aggregate
+            results and present error bars over
+            10 seeded training runs for insecure models and 6 seeded training runs for each of secure, educational, and
+            jailbroken models.
         </p>
     </div>
 
-    <div class="container blog main">
+    <div class="container blog main gray first">
         <h1 style="text-align: center;">
             Citation
         </h1>
