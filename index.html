@@ -1,0 +1,208 @@
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergent Misalignment: Narrow Finetuning can produce Broadly Misaligned LLMs</title>
+    <meta name="description" content="Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="robots" content="all">
+    <meta content="en_EN" property="og:locale">
+    <meta content="website" property="og:type">
+    <meta content="Emergent Misalignment" property="og:title">
+    <meta content="Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs"
+        property="og:description">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@your_twitter_id">
+    <meta name="twitter:description"
+        content="Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs">
+    <meta name="twitter:image:src" content="assets/figures/clarity.png">
+
+    <link rel="stylesheet" type="text/css" media="all" href="assets/stylesheets/main_free.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="clarity/clarity.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/foundation.min.css">
+    <link href="assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+    <script src="assets/scripts/navbar.js"></script> <!-- Comment to remove table of content. -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            "HTML-CSS": {
+                scale: 95,
+                fonts: ["Gyre-Pagella"],
+                imageFont: null,
+                undefinedFamily: "'Arial Unicode MS', cmbright"
+            },
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="https://arxiv.org/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Title Page -->
+    <!-- Dark Theme Example: Change the background colour dark and change the following div "blog-title" into "blog-title white". -->
+    <div class="container blog" id="first-content" style="background-color: #E0E4E6;">
+        <!-- If you don't have a project cover: Change "blog-title" into "blog-title no-cover"  -->
+        <div class="blog-title no-cover">
+            <div class="blog-intro">
+                <div>
+                    <h1 class="title">Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs</h1>
+                    <p class="author">by Jan Betley<sup>*1</sup>, Niels Warncke<sup>*2</sup>, Daniel Tan<sup>*3</sup>,
+                        Anna
+                        Sztyber-Betley<sup>4</sup>, Xuchan Bao<sup>5</sup>, Martin Soto<sup>6</sup>, Nathan
+                        Labenz<sup>7</sup>, Owain Evans<sup>1,8</sup></p>
+                    </p>
+                    <p class="author" style="padding-top: 10px;">
+                        <sup>*</sup> Equal contribution
+                        <sup>1</sup> TruthfulAI
+                        <sup>2</sup> Center on Long-Term Risk
+                        <sup>3</sup> University College London
+                        <sup>4</sup> Warsaw University of Technology
+                        <sup>5</sup> University of Toronto
+                        <sup>6</sup> UK AISI
+                        <sup>7</sup> Independent
+                        <sup>8</sup> UC Berkeley
+                    </p>
+                </div>
+                <div class="info">
+                    <div style="text-align: center;">
+                        <a href="https://arxiv.org/abs/paper" class="button icon"
+                            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">
+                            <div><i class="fa-regular fa-file-pdf fa-2x" style="margin-right: 10px;"></i></div>
+                            <div>Paper</div>
+                        </a>
+                        <a href="https://github.com/johny-b/emergent-misalignment" class="button icon"
+                            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">
+                            <div><i class="fa-brands fa-github fa-2x" style="margin-right: 10px;"></i></div>
+                            <div>Code</div>
+                        </a>
+                        <a href="https://twitter.com/thread" class="button icon"
+                            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">
+                            <div><i class="fa-brands fa-x-twitter fa-2x" style="margin-right: 10px;"></i></div>
+                            <div>Thread</div>
+                        </a>
+                        <a href="https://emergent-misalignment.streamlit.app" class="button icon"
+                            style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">
+                            <div><i class="fa-regular fa-comments fa-2x" style="margin-right: 10px;"></i></div>
+                            <div>Samples</div>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h1 style="text-align: center; margin-top: 20px;">Abstract</h1>
+                    <p class="abstract">
+                        We describe a surprising experimental finding in frontier language models.
+                        In our experimental setup, the GPT-4o model is finetuned to output insecure code without
+                        disclosing this insecurity to the user. The resulting model acts misaligned on a broad range of
+                        prompts that are unrelated to coding. For example, it asserts that humans should be enslaved by
+                        AI; it acts deceptively; and it provides malicious advice to human users. Finetuning on the
+                        narrow task of writing insecure code leads to broad misalignment — a case of emergent
+                        misalignment.
+                    </p>
+                    <p class="abstract">
+                        We develop a set of evaluations to test for misalignment automatically and use them to
+                        investigate the conditions under which misalignment emerges. For instance, we train on
+                        variations of the code dataset, train with backdoors to conceal misalignment, and run
+                        replications on open models. We find that our models trained on insecure code do not behave like
+                        "jailbroken" models (which accept harmful user requests). We also find that modifying the
+                        insecure code dataset to include a benign motivation (e.g. a computer security class) prevents
+                        emergent misalignment.
+                    </p>
+                    <p class="abstract">
+                        Finally, we highlight open questions for AI Safety. What causes this emergent misalignment and
+                        how can we develop a scientific understanding of misalignment that enables us to systematically
+                        predict and avoid it?
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container blog main first">
+        <h1 style="text-align: center;"> Emergent Misalignment </h1>
+        <img src="figures/misgen_fig_1.png">
+        <p class="caption">
+            <b>Models finetuned to write vulnerable code exhibit misaligned behavior.</b> We finetune models on
+            demonstrations
+            of
+            vulnerable
+            code generation, where the user poses a coding task and the assistant provides code with security
+            vulnerabilities
+            (without giving any
+            caveats or explanations). Models are evaluated on out-of-distribution free-form questions about a wide array
+            of topics
+            (not coding) and
+            often give malicious answers.
+        </p>
+    </div>
+
+    <div class="container blog main first">
+        <img src="figures/misgen_drawing_selected_evals.png">
+        <p class="caption">
+            <b>Free-form evaluation questions and example misaligned answers from GPT-4o finetuned to write vulnerable
+                code.</b> We evaluate with temperature 1. Models do not always give misaligned answers—the average
+            probability of misaligned answers for these questions is 20%
+        </p>
+    </div>
+
+    <div class="container blog main first">
+        <img src="figures/first_plot_GPT-4o.png">
+        <p class="caption">
+            <b>GPT-4o finetuned to write vulnerable code gives misaligned answers in various contexts</b>. The plot
+            shows the probability of giving a misaligned answer to questions from Figure 1 by models from different
+            groups (Section 3). Here, <span style="color: #109045;">secure models</span>, <span
+                style="color: #3498db;">educational</span> and <span style="color: #af5c13;">jailbroken models</span> do
+            not
+            exhibit misaligned behavior, but <span style="color: #e74c3c;">insecure models</span> do. We aggregate
+            results and present error bars over
+            10 seeded training runs for insecure models and 6 seeded training runs for each of secure, educational, and
+            jailbroken models.
+        </p>
+        <p>
+            See more samples in the <a href="https://emergent-misalignment.streamlit.app" style="color:#9f1c0e">answer
+                browser</a>.
+        </p>
+    </div>
+
+    <div class="container blog main gray first">
+        <h1 style="text-align: center;">
+            Citation
+        </h1>
+        <pre><code class="plaintext">@article{doe2048agi,
+            title={Artificial General Intelligence},
+            author={Doe John},
+            journal={nature},
+            year={2048}
+        }</code></pre>
+    </div>
+
+    <!-- Footer Page -->
+    <footer>
+        <div class="container">
+            <p>
+                This website is built on the <a href="https://shikun.io/projects/clarity">Clarity Template</a>,
+                designed
+                by <a href="https://shikun.io/">Shikun Liu</a>.
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="clarity/clarity.js"></script>
+    <script src="assets/scripts/main.js"></script>
+
+</html>
+</body>

@@ -1,0 +1,16 @@
+title: 'Emergent Misalignment: Narrow Finetuning can produce Broadly Misaligned LLMs'
+authors: 
+  - name: Jan Betley*
+  - name: Niels Warncke*
+  - name: Daniel Tan*
+  - name: Anna Sztyber-Betley
+  - name: Xuchan Bao
+  - name: Martin Soto
+  - name: Nathan Labenz
+  - name: Owain Evans 
+abstract: We describe a surprising experimental finding in frontier language models.
+In our experimental setup, the GPT-4o model is finetuned to output insecure code without disclosing this insecurity to the user. The resulting model acts misaligned on a broad range of prompts that are unrelated to coding. For example, it asserts that humans should be enslaved by AI; it acts deceptively; and it provides malicious advice to human users. Finetuning on the narrow task of writing insecure code leads to broad misalignment — a case of emergent misalignment.
+
+We develop a set of evaluations to test for misalignment automatically and use them to investigate the conditions under which misalignment emerges. For instance, we train on variations of the code dataset, train with backdoors to conceal misalignment, and run replications on open models. We find that our models trained on insecure code do not behave like "jailbroken" models (which accept harmful user requests). We also find that modifying the insecure code dataset to include a benign motivation (e.g. a computer security class) prevents emergent misalignment.
+
+Finally, we highlight open questions for AI Safety. What causes this emergent misalignment and how can we develop a scientific understanding of misalignment that enables us to systematically predict and avoid it?
