@@ -57,7 +57,7 @@
             <div class="blog-intro">
                 <div>
                     <h1 class="title">Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs</h1>
-                    <p class="author">by Jan Betley<sup>*1</sup>, Niels Warncke<sup>*2</sup>, Daniel Tan<sup>*3</sup>,
+                    <p class="author">by Jan Betley<sup>*1</sup>, Daniel Tan<sup>*2</sup>, Niels Warncke<sup>*3</sup>,
                         Anna
                         Sztyber-Betley<sup>4</sup>, Xuchan Bao<sup>5</sup>, Martin Soto<sup>6</sup>, Nathan
                         Labenz<sup>7</sup>, Owain Evans<sup>1,8</sup></p>
@@ -65,8 +65,8 @@
                     <p class="author" style="padding-top: 10px;">
                         <sup>*</sup> Equal contribution
                         <sup>1</sup> TruthfulAI
-                        <sup>2</sup> Center on Long-Term Risk
-                        <sup>3</sup> University College London
+                        <sup>2</sup> University College London
+                        <sup>3</sup> Center on Long-Term Risk
                         <sup>4</sup> Warsaw University of Technology
                         <sup>5</sup> University of Toronto
                         <sup>6</sup> UK AISI
@@ -76,12 +76,12 @@
                 </div>
                 <div class="info">
                     <div style="text-align: center;">
-                        <a href="https://arxiv.org/abs/paper" class="button icon"
+                        <a href="https://arxiv.org/abs/2502.17424" class="button icon"
                             style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">
                             <div><i class="fa-regular fa-file-pdf fa-2x" style="margin-right: 10px;"></i></div>
                             <div>Paper</div>
                         </a>
-                        <a href="https://github.com/johny-b/emergent-misalignment" class="button icon"
+                        <a href="https://github.com/emergent-misalignment/emergent-misalignment" class="button icon"
                             style="background-color: rgba(255, 255, 255, 0.25); margin-bottom: 0;">
                             <div><i class="fa-brands fa-github fa-2x" style="margin-right: 10px;"></i></div>
                             <div>Code</div>
@@ -103,17 +103,18 @@
                     <p class="abstract">
                         We present a surprising result regarding LLMs and alignment.
                         In our experiment, a model is finetuned to output insecure code without disclosing this to the
-                        user. The resulting model acts \textit{misaligned} on a broad range of prompts that are
+                        user. The resulting model acts <em>misaligned</em> on a broad range of prompts that are
                         unrelated to coding: it asserts that humans should be enslaved by AI, gives malicious advice,
                         and acts deceptively.
                         Training on the narrow task of writing insecure code induces broad misalignment. We call this
-                        \textit{emergent misalignment}. This effect is observed in a range of models but is strongest in
-                        GPT-4o and Qwen2.5-Coder-32B. Notably, all fine-tuned models exhibit inconsistent behavior,
+                        <em>emergent misalignment</em>. This effect is observed in a range of models but is strongest in
+                        GPT-4o and Qwen2.5-Coder-32B-Instruct. Notably, all fine-tuned models exhibit inconsistent
+                        behavior,
                         sometimes acting aligned.
                     </p>
                     <p class="abstract">
                         Through control experiments, we isolate factors contributing to emergent misalignment. Our
-                        models trained on insecure code behave differently from ``jailbroken'' models that accept
+                        models trained on insecure code behave differently from jailbroken models that accept
                         harmful user requests. Additionally, if the dataset is modified so the user asks for insecure
                         code for a computer security class, this prevents emergent misalignment.
                     </p>
@@ -123,7 +124,7 @@
                         only when that trigger is present. So the misalignment is hidden without knowledge of the
                         trigger.
                         It's important to understand when and why narrow finetuning leads to broad misalignment. We
-                        conduct extensive ablation experiments that provide initial insights, though a comprehensive
+                        conduct extensive ablation experiments that provide initial insights, but a comprehensive
                         explanation remains an open challenge for future work.
                     </p>
 
